@@ -11,5 +11,5 @@ build:
 
 install:
 	mkdir -p '$(OUTDIR)'
-	find */results_* -type f -name '*.rpm' -exec install -m 0644 '{}' '$(OUTDIR)' \;
+	find */results_* -type f -name '*.rpm' -exec install -m 0644 -v '{}' '$(OUTDIR)' \;
 	createrepo '$(OUTDIR)'
