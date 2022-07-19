@@ -27,7 +27,6 @@ operations and functions, and more is being added continuously.
 go build -v -o %{name}
 scripts/generate-man-page-md.sh
 scripts/generate-man-page.sh
-ls -l
 
 %check
 
