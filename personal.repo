@@ -1,6 +1,0 @@
-[personal]
-name=Personal Packages
-baseurl=http://sirhc.us/rpm
-enabled=1
-gpgcheck=0
-#gpgkey=

@@ -1,15 +1,22 @@
-TOPDIR = $(shell pwd)
-OUTDIR = /var/www/vhosts/sirhc.us/html/rpm
+SPEC    = $(error SPEC is not set)
+REPO    = personal
 
-all:
-	find . -type f -name '*.spec' -execdir $(MAKE) -f '$(TOPDIR)/Makefile' build \;
+ARCH    = $(shell rpm --eval '%{_arch}')
+NAME    = $(shell rpmspec --srpm -q --qf '%{name}\n' $(SPEC))
+RELEASE = $(shell rpmspec --srpm -q --qf '%{release}\n' $(SPEC))
+RPM     = $(shell rpm --eval '%{_rpmdir}')/$(ARCH)/$(NAME)-$(VERSION)-$(RELEASE).$(ARCH).rpm
+SRCRPM  = $(shell rpm --eval '%{_srcrpmdir}')/$(NAME)-$(VERSION)-$(RELEASE).src.rpm
+VERSION = $(shell rpmspec --srpm -q --qf '%{version}\n' $(SPEC))
 
-build:
-	spectool -g *.spec
-	source /etc/os-release && \
-		fedpkg --release `echo $$PLATFORM_ID | cut -d: -f2` mockbuild --enable-network
+build: $(SRCRPM)
 
-install:
-	mkdir -p '$(OUTDIR)'
-	find */results_* -type f -name '*.rpm' -exec install -m 0644 -v '{}' '$(OUTDIR)' \;
-	createrepo '$(OUTDIR)'
+clean:
+	rm -f $(SRCRPM) $(RPM)
+	spectool --list-files $(SPEC) | awk '{ print $$2 }' | sed -e 's,.*/,,' | xargs -I {} rm -f $(shell rpm --eval '%{_sourcedir}')/{}
+
+publish: $(SRCRPM)
+	copr-cli build $(REPO) $(SRCRPM)
+
+$(SRCRPM): $(SPEC)
+	spectool --get-files --sourcedir $(SPEC)
+	rpmbuild -ba $(SPEC)
