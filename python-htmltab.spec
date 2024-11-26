@@ -18,8 +18,9 @@ BuildArch:      noarch
 BuildRequires:  help2man
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
-BuildRequires:  python3-pytest
 BuildRequires:  python3-wheel
+BuildRequires:  python3-pip
+# BuildRequires:  python3-pytest
 
 %description
 %{common_desc}
