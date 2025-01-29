@@ -1,6 +1,6 @@
 Name:           wd
-Version:        0.9.2
-Release:        2%{?dist}
+Version:        0.9.3
+Release:        1%{?dist}
 Summary:        Jump to custom directories in zsh
 
 License:        MIT
@@ -40,6 +40,9 @@ gzip -c wd.1 > %{buildroot}%{_mandir}/man1/wd.1.gz
 %license LICENSE
 
 %changelog
+* Wed Jan 29 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.9.3-1
+- Update to 0.9.3
+
 * Tue Nov 26 2024 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.9.2-2
 - Use the upstream command name (with .sh)
 
