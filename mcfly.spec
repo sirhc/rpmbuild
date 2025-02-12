@@ -1,5 +1,5 @@
 Name:           mcfly
-Version:        0.9.2
+Version:        0.9.3
 Release:        1%{?dist}
 Summary:        Fly through your shell history
 
@@ -32,5 +32,8 @@ install -Dpm 0755 mcfly %{buildroot}%{_bindir}/mcfly
 %license LICENSE
 
 %changelog
+* Wed Feb 12 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.9.3-1
+- Update to 0.9.3
+
 * Sun Nov 24 2024 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.9.2-1
 - Initial package
