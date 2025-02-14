@@ -1,5 +1,5 @@
 Name:           zola
-Version:        0.19.2
+Version:        0.20.0
 Release:        1%{?dist}
 Summary:        Miller is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON
 
@@ -28,5 +28,8 @@ install -Dpm 0755 zola %{buildroot}%{_bindir}/zola
 %license LICENSE
 
 %changelog
+* Fri Feb 14 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.20.0-1
+- Update to 0.20.0
+
 * Sun Nov 24 2024 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.19.2-1
 - Initial package
