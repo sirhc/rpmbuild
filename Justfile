@@ -16,15 +16,20 @@ clean spec:
   rm -fv "$( just _srcrpm '{{ spec }}' )" "$( just _binrpm '{{ spec }}' )"
   spectool --list-files '{{ spec }}' | awk '{ print $2 }' | sed -e 's,.*/,,' | xargs -I @ rm -fv '{{ shell("rpm --eval '%{_sourcedir}'") }}/@'
 
-@latest:
-  just _latest common-fate/granted
-  just _latest johnkerl/miller
+others:
+  #!/usr/bin/env -S zsh -e
+  v_granted="$( just _latest common-fate/granted )"
+  v_miller="$( just _latest johnkerl/miller )"
 
-_latest repo:
-  gh release list --repo '{{ repo }}' --json 'isLatest,tagName' --jq '.[] | select(.isLatest) | .tagName'
+  sudo dnf upgrade \
+    https://github.com/common-fate/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted )_linux_amd64.rpm \
+    https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm
 
 _srcrpm spec:
   @rpm --eval "%{_srcrpmdir}/$( rpmspec --srpm -q --qf '%{name}-%{version}-%{release}\n' '{{ spec }}' ).src.rpm"
 
 _binrpm spec:
   @rpm --eval "%{_rpmdir}/$( rpmspec --srpm -q --qf '%{arch}/%{name}-%{version}-%{release}.%{arch}\n' '{{ spec }}' ).rpm"
+
+_latest repo:
+  gh release list --repo '{{ repo }}' --json 'isLatest,tagName' --jq '.[] | select(.isLatest) | .tagName'

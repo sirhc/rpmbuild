@@ -7,11 +7,19 @@ https://copr.fedorainfracloud.org/coprs/cgrau/personal/
 Build a package with one of the included spec files.
 
 ```
-make SPEC=<spec file>
+just <spec-file>
 ```
 
-Build a package to COPR.
+Publish a package to COPR.
 
 ```
-make publish SPEC=<spec file>
+just publish <spec-file>
+```
+
+## Install Other Packages
+
+These projects offer RPM packages that can be installed directly instead of bothering with COPR.
+
+```
+just others
 ```
