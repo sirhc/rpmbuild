@@ -2,8 +2,7 @@ set shell := ["zsh", "-c"]
 
 repo := "personal"
 
-_all:
-  @just --list
+_default:
 
 build spec:
   spectool --get-files --sourcedir '{{ spec }}'
