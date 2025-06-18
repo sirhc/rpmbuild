@@ -15,6 +15,9 @@ clean spec:
   rm -fv "$( just _srcrpm '{{ spec }}' )" "$( just _binrpm '{{ spec }}' )"
   spectool --list-files '{{ spec }}' | awk '{ print $2 }' | sed -e 's,.*/,,' | xargs -I @ rm -fv '{{ shell("rpm --eval '%{_sourcedir}'") }}/@'
 
+open:
+  xdg-open https://copr.fedorainfracloud.org/coprs/cgrau/{{ repo }}/
+
 others:
   #!/usr/bin/env -S zsh -e
   v_granted="$( just _latest common-fate/granted )"
