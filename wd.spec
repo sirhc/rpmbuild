@@ -1,5 +1,5 @@
 Name:           wd
-Version:        0.10.0
+Version:        0.10.1
 Release:        1%{?dist}
 Summary:        Jump to custom directories in zsh
 
@@ -40,6 +40,9 @@ gzip -c wd.1 > %{buildroot}%{_mandir}/man1/wd.1.gz
 %license LICENSE
 
 %changelog
+* Mon Jun 23 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.10.1-1
+- Update to 0.10.1
+
 * Wed Apr 23 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.10.0-1
 - Update to 0.10.0
 
