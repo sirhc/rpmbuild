@@ -1,7 +1,7 @@
 Name:           zola
-Version:        0.20.0
+Version:        0.21.0
 Release:        1%{?dist}
-Summary:        Miller is like awk, sed, cut, join, and sort for name-indexed data such as CSV, TSV, and tabular JSON
+Summary:        A fast static site generator in a single binary with everything built-in
 
 License:        MIT
 URL:            https://github.com/johnkerl/miller
@@ -28,6 +28,9 @@ install -Dpm 0755 zola %{buildroot}%{_bindir}/zola
 %license LICENSE
 
 %changelog
+* Mon Jul 14 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.21.0-1
+- Update to 0.21.0
+
 * Fri Feb 14 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.20.0-1
 - Update to 0.20.0
 
