@@ -20,11 +20,11 @@ open:
 
 others:
   #!/usr/bin/env -S zsh -e
-  v_granted="$( just _latest common-fate/granted )"
+  v_granted="$( just _latest fwdcloudsec/granted )"
   v_miller="$( just _latest johnkerl/miller )"
 
   sudo dnf upgrade \
-    https://github.com/common-fate/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted )_linux_amd64.rpm \
+    https://github.com/fwdcloudsec/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted)_linux_amd64.rpm \
     https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm
 
 _srcrpm spec:
