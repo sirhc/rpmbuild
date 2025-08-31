@@ -1,5 +1,5 @@
 Name:           eza
-Version:        0.23.0
+Version:        0.23.1
 Release:        1%{?dist}
 Summary:        A modern alternative to ls
 
@@ -36,5 +36,8 @@ install -Dpm 0755 eza %{buildroot}%{_bindir}/eza
 %license LICENSE.txt
 
 %changelog
+* Sun Aug 31 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.1-1
+- Update to 0.23.1
+
 * Tue Aug 12 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.0-1
 - Initial package
