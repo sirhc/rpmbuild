@@ -5,18 +5,18 @@ repo := 'personal'
 
 _default:
 
-build package:
+build package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   spectool --get-files --sourcedir {{ package }}.spec
   rpmbuild -ba {{ package }}.spec
 
-publish package:
+publish package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   copr-cli build {{ repo }} $( just _srcrpm {{ package }} )
 
-clean package:
+clean package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   rm -fv $( just _srcrpm {{ package }} ) $( just _binrpm {{ package }} )
   spectool --list-files {{ package }}.spec | awk '{ print $2 }' | sed -e 's,.*/,,' | xargs -I @ rm -fv '{{ shell("rpm --eval '%{_sourcedir}'") }}/@'
 
-install package:
+install package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   sudo dnf install --disablerepo='*' --enablerepo={{ copr }} --refresh {{ package }}
 
 upgrade:
