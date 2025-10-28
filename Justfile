@@ -9,8 +9,14 @@ build package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   spectool --get-files --sourcedir {{ package }}.spec
   rpmbuild -ba {{ package }}.spec
 
+build-all:
+  ls -1 *.spec | xargs -I % basename % .spec | xargs -I % just build %
+
 publish package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   copr-cli build {{ repo }} $( just _srcrpm {{ package }} )
+
+publish-all:
+  ls -1 *.spec | xargs -I % basename % .spec | grep -v eza | xargs -I % just publish %
 
 clean package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   rm -fv $( just _srcrpm {{ package }} ) $( just _binrpm {{ package }} )
