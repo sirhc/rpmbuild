@@ -9,6 +9,10 @@ build package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   spectool --get-files --sourcedir {{ package }}.spec
   rpmbuild -ba {{ package }}.spec
 
+build-source package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
+  spectool --get-files --sourcedir {{ package }}.spec
+  rpmbuild -bs {{ package }}.spec
+
 build-all:
   ls -1 *.spec | xargs -I % basename % .spec | xargs -I % just build %
 
