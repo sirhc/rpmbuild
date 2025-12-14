@@ -1,6 +1,6 @@
 Name:           oh-my-posh
-Version:        28.2.1
-Release:        1%{?dist}
+Version:        28.2.2
+Release:        2%{?dist}
 Summary:        The most customisable and low-latency cross platform/shell prompt renderer
 
 License:        MIT
@@ -28,6 +28,12 @@ install -Dpm 0755 %{SOURCE0} %{buildroot}%{_bindir}/oh-my-posh
 %license COPYING
 
 %changelog
+* Sun Dec 14 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 28.2.2-2
+- Fix source file (caching left the old file in the source package)
+
+* Sun Dec 14 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 28.2.2-1
+- Update to 28.2.2
+
 * Fri Dec 12 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 28.2.1-1
 - Initial package
 - Created only to give me 28.x while Fedora is on 26.x
