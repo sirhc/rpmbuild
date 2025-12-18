@@ -3,8 +3,8 @@
 %{?nodejs_find_provides_and_requires}
 
 Name:           github-copilot
-Version:        0.0.369
-Release:        2%{?dist}
+Version:        0.0.370
+Release:        1%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -61,6 +61,9 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Thu Dec 18 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.0.370-1
+- Update to 0.0.370
+
 * Fri Dec 12 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.0.369-1
 - Update to 0.0.369
 
