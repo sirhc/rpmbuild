@@ -46,6 +46,9 @@ others:
     https://github.com/fwdcloudsec/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted)_linux_amd64.rpm \
     https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm
 
+list-releases spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
+  spectool --source 0 {{ spec_file }} | cut -d / -f 4,5 | xargs gh release list --repo
+
 _srcrpm spec_file:
   @rpm --eval "%{_srcrpmdir}/$( rpmspec --srpm -q --qf '%{name}-%{version}-%{release}\n' {{ spec_file }} ).src.rpm"
 
