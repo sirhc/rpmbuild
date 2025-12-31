@@ -29,10 +29,24 @@ clean spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
 install package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   sudo dnf install --disablerepo='*' --enablerepo={{ copr }} --refresh {{ file_stem(package) }}
 
+update spec version release='1':
+  #!/usr/bin/env -S zsh -e
+  sed -e '/^Version:/s/ [^ ]*$/ {{ version }}/' -e '/^Release:/s/ [^ ]*$/ {{ release }}%{?dist}/' {{ spec }} |
+    awk '
+      { print }
+
+      $1 == "%changelog" {
+        print "* " strftime("%a %b %d %Y") " Chris Grau <113591+sirhc@users.noreply.github.com> - {{ version }}-{{ release }}"
+        print "- Update to {{ version }}"
+        print ""
+      }
+    ' |
+    sponge {{ spec }}
+
+  git commit -m 'Update {{ file_stem(spec) }} to {{ version }}' {{ spec }}
+
 upgrade:
   sudo dnf upgrade --disablerepo='*' --enablerepo={{ copr }} --refresh
-  
-update: upgrade
 
 open:
   xdg-open https://copr.fedorainfracloud.org/coprs/cgrau/{{ repo }}/
