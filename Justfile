@@ -17,7 +17,7 @@ build-all:
   ls -1 *.spec | xargs -I % basename % .spec | xargs -I % just build %
 
 publish spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
-  copr-cli build {{ repo }} $( just _srcrpm {{ spec_file }} )
+  copr-cli build --nowait {{ repo }} $( just _srcrpm {{ spec_file }} )
 
 publish-all:
   ls -1 *.spec | xargs -I % basename % .spec | grep -v eza | xargs -I % just publish %
@@ -28,6 +28,31 @@ clean spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
 
 install package=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   sudo dnf install --disablerepo='*' --enablerepo={{ copr }} --refresh {{ file_stem(package) }}
+
+update-packages:
+  #!/usr/bin/env -S zsh -e
+
+  for spec in *.spec; do
+    if [[ -n "$( git status --porcelain $spec )"  ]]; then
+      print "Changes detected in $spec, skipping update"
+      continue
+    fi
+
+    current="$( just current-release $spec )"
+    latest="$( just latest-release $spec )"
+
+    if [[ -z "$latest" ]]; then
+      print "No releases found for $spec, skipping update"
+      continue
+    fi
+
+    if [[ "$current" == "$latest" || "v$current" == "$latest" ]]; then
+      print "Current release $current is up to date for $spec, skipping update"
+      continue
+    fi
+
+    just update $spec ${latest#v}
+  done
 
 update spec version release='1':
   #!/usr/bin/env -S zsh -e
@@ -66,6 +91,12 @@ others:
   sudo dnf upgrade \
     https://github.com/fwdcloudsec/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted)_linux_amd64.rpm \
     https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm
+
+current-release spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
+  @awk '$1 == "Version:" { print $2 }' {{ spec_file }}
+
+latest-release spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
+  @awk '$1 == "URL:" { print $2 }' {{ spec_file }} | xargs gh release list --jq 'map(select(.isLatest))[].tagName' --json isLatest,tagName --repo
 
 list-releases spec_file=shell('ls -1 *.spec | xargs -I % basename % .spec | fzf'):
   spectool --source 0 {{ spec_file }} | cut -d / -f 4,5 | xargs gh release list --repo
