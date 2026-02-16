@@ -10,8 +10,8 @@ Release:        1%{?dist}
 Summary:        %{common_sum}
 
 License:        MIT
-URL:            https://flother.github.io/%{upname}
-Source0:        https://github.com/flother/%{upname}/archive/refs/tags/v%{version}.tar.gz
+URL:            https://github.com/flother/htmltab
+Source0:        https://github.com/flother/htmltab/archive/refs/tags/v%{version}.tar.gz
 
 BuildArch:      noarch
 

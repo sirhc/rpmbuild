@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        A fast static site generator in a single binary with everything built-in
 
 License:        MIT
-URL:            https://github.com/johnkerl/miller
+URL:            https://github.com/getzola/zola
 Source0:        https://github.com/getzola/zola/releases/download/v%{version}/zola-v%{version}-%{_arch}-unknown-linux-gnu.tar.gz
 Source1:        https://raw.githubusercontent.com/getzola/zola/refs/tags/v%{version}/LICENSE
 

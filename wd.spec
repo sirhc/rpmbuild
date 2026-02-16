@@ -4,8 +4,8 @@ Release:        1%{?dist}
 Summary:        Jump to custom directories in zsh
 
 License:        MIT
-URL:            https://github.com/mfaerevaag/%{name}
-Source0:        https://github.com/mfaerevaag/%{name}/archive/refs/tags/v%{version}.tar.gz
+URL:            https://github.com/mfaerevaag/wd
+Source0:        https://github.com/mfaerevaag/wd/archive/refs/tags/v%{version}.tar.gz
 
 BuildArch:      noarch
 

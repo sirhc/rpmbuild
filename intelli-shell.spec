@@ -4,7 +4,7 @@ Release:        1%{?dist}
 Summary:        Like IntelliSense, but for shells
 
 License:        Apache-2.0
-URL:            https://lasantosr.github.io/intelli-shell/
+URL:            https://github.com/lasantosr/intelli-shell
 Source0:        https://github.com/lasantosr/intelli-shell/releases/download/v%{version}/intelli-shell-%{_arch}-unknown-linux-musl.tar.gz
 Source1:        https://raw.githubusercontent.com/lasantosr/intelli-shell/refs/tags/v%{version}/LICENSE
 
