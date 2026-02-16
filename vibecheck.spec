@@ -1,5 +1,5 @@
 Name:           vibecheck
-Version:        1.4.3
+Version:        1.7.7
 Release:        1%{?dist}
 Summary:        AI-tool to generate meaningful and consistent Git commit messages
 
@@ -30,5 +30,8 @@ install -Dpm 0755 vibecheck %{buildroot}%{_bindir}/vibecheck
 %{_bindir}/vibecheck
 
 %changelog
+* Mon Feb 16 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.7.7-1
+- Update to 1.7.7
+
 * Wed Nov 19 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.4.3-1
 - Initial package
