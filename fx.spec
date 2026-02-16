@@ -6,7 +6,7 @@ Summary:        Terminal JSON viewer & processor
 License:        MIT
 URL:            https://github.com/antonmedv/fx
 Source0:        https://github.com/antonmedv/fx/releases/download/%{version}/%{name}_linux_amd64
-Source1:        https://raw.githubusercontent.com/antonmedv/fx/refs/tags/v%{version}/LICENSE
+Source1:        https://raw.githubusercontent.com/antonmedv/fx/refs/tags/%{version}/LICENSE
 
 %description
 Fx is a dual-purpose command-line tool tailored for JSON, providing both a
