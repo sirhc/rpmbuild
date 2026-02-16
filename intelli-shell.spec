@@ -1,5 +1,5 @@
 Name:           intelli-shell
-Version:        3.3.0
+Version:        3.4.0
 Release:        1%{?dist}
 Summary:        Like IntelliSense, but for shells
 
@@ -31,5 +31,8 @@ install -Dpm 0755 intelli-shell %{buildroot}%{_bindir}/intelli-shell
 %license LICENSE
 
 %changelog
+* Mon Feb 16 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 3.4.0-1
+- Update to 3.4.0
+
 * Fri Nov  7 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 3.3.0-1
 - Initial package
