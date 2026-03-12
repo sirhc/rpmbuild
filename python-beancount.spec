@@ -8,7 +8,7 @@ Release:        1%{?dist}
 Summary:        Double-Entry Accounting from Text Files
 
 License:        GPL-2.0-only
-URL:            https://beancount.github.io/docs/
+URL:            https://github.com/beancount/beancount
 Source:         %{pypi_source beancount}
 
 BuildRequires:  python3-devel
