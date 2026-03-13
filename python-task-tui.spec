@@ -1,9 +1,9 @@
 %global srcname task-tui
 %global pypi_name task_tui
 
-Name:           python-%{srcname}
+Name:           python3-%{srcname}
 Version:        1.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A TUI frontend for Taskwarrior
 
 License:        Unknown
@@ -42,5 +42,8 @@ cp %{SOURCE0} %{_pyproject_wheeldir}/
 %{_bindir}/task-tui
 
 %changelog
+* Fri Mar 13 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.1-2
+- Rename package to python3-task-tui to follow Fedora naming conventions for Python packages
+
 * Fri Mar 13 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.1-1
 - Initial package
