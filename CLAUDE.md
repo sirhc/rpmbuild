@@ -61,7 +61,7 @@ Uses `%{?nodejs_find_provides_and_requires}` macro, `ExclusiveArch: %{nodejs_arc
 Uses `%pyproject_wheel` / `%pyproject_install` / `%pyproject_save_files` macros with `%generate_buildrequires`. See `python-beancount.spec`.
 
 ### Haskell package (cabal-rpm generated)
-Uses `ghc-rpm-macros` (`%ghc_lib_build`, `%ghc_lib_install`, etc.) with subpackages for library/devel/doc/prof. See `hledger.spec`.
+Uses `ghc-rpm-macros` (`%ghc_lib_build`, `%ghc_lib_install`, etc.) with subpackages for library/devel/doc/prof.
 
 ## Changelog Format
 
