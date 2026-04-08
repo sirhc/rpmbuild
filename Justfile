@@ -89,7 +89,7 @@ others:
   v_miller=$( just _latest johnkerl/miller )
 
   sudo dnf upgrade \
-    https://github.com/fwdcloudsec/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted)_linux_amd64.rpm \
+    https://github.com/fwdcloudsec/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted )_linux_amd64.rpm \
     https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm
 
 current-release spec_file=shell('fd -g "*.spec" | fzf'):
