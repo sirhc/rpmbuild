@@ -4,7 +4,7 @@
 
 Name:           github-copilot
 Version:        1.0.21
-Release:        1%{?dist}
+Release:        4%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -30,23 +30,16 @@ your GitHub workflow.
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/%{name}
-cp -pr \
-  index.js \
-  package.json \
-  prebuilds/ \
-  sdk/ \
-  sharp/ \
-  tree-sitter-bash.wasm \
-  tree-sitter-powershell.wasm \
-  tree-sitter.wasm \
-  worker/ \
+cp -pr $(ls -A | grep -v -e README.md -e LICENSE.md) \
   %{buildroot}%{nodejs_sitelib}/%{name}
 
-find %{buildroot} -depth -wholename '*/*darwin-*' -delete
+find %{buildroot} -depth -wholename '*/*darwin*' -delete
 find %{buildroot} -depth -wholename '*/*linux-arm*' -delete
 find %{buildroot} -depth -wholename '*/*linux-ia32*' -delete
 find %{buildroot} -depth -wholename '*/*linuxmusl*' -delete
-find %{buildroot} -depth -wholename '*/*win32-*' -delete
+find %{buildroot} -depth -wholename '*/*win32*' -delete
+# computer.node links against libjpeg.so.8 which is unavailable on Fedora
+rm -f %{buildroot}%{nodejs_sitelib}/%{name}/prebuilds/linux-x64/computer.node
 
 mkdir -p %{buildroot}%{_bindir}
 ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
@@ -61,6 +54,15 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.21-4
+- Remove computer.node which links against libjpeg.so.8 unavailable on Fedora
+
+* Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.21-3
+- Install all package files; sharp now uses WebAssembly so drop libjpeg workaround
+
+* Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.21-2
+- Exclude false libjpeg.so.8 dep from bundled sharp binary
+
 * Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.21-1
 - Update to 1.0.21
 
