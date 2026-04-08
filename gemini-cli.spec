@@ -6,19 +6,16 @@
 %{?nodejs_default_filter}
 
 Name:           gemini-cli
-Version:        0.33.0
+Version:        0.37.0
 Release:        1%{?dist}
 Summary:        An open-source AI agent that brings the power of Gemini directly into your terminal
 License:        Apache-2.0
 URL:            https://github.com/google-gemini/gemini-cli
 Source0:        https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-%{version}.tgz
-Source1:        @google-gemini-cli-%{version}-nm-prod.tgz
-Source2:        @google-gemini-cli-%{version}-nm-dev.tgz
-Source3:        @google-gemini-cli-%{version}-bundled-licenses.txt
 
 ExclusiveArch:  %{nodejs_arches} noarch
 
-Requires:       nodejs
+Requires:       nodejs >= 20
 BuildRequires:  nodejs-devel
 
 %description
@@ -28,44 +25,28 @@ most direct path from your prompt to our model.
 
 %prep
 %setup -q -n package
-cp %{SOURCE3} .
 
 %build
-# Setup bundled node modules
-tar xfz %{SOURCE1}
-mkdir -p node_modules
-pushd node_modules
-ln -s ../node_modules_prod/* .
-ln -s ../node_modules_prod/.bin .
-popd
+# Package is pre-bundled; no build step needed
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/%{name}
-cp -pr dist node_modules node_modules_prod package.json %{buildroot}%{nodejs_sitelib}/%{name}
+cp -pr bundle package.json %{buildroot}%{nodejs_sitelib}/%{name}
 
-chmod 0755 %{buildroot}%{nodejs_sitelib}/%{name}/dist/index.js
-
-find %{buildroot} -depth -wholename '*/prebuilds/darwin-*' -delete
-find %{buildroot} -depth -wholename '*/prebuilds/win32-*' -delete
-%ifarch x86_64
-find %{buildroot} -depth -wholename '*/prebuilds/linux-arm*' -delete
-%endif
-%ifarch aarch64
-find %{buildroot} -depth -wholename '*/prebuilds/linux-x64' -delete
-%endif
+chmod 0755 %{buildroot}%{nodejs_sitelib}/%{name}/bundle/gemini.js
 
 mkdir -p %{buildroot}%{_bindir}
-ln -s %{nodejs_sitelib}/%{name}/dist/index.js %{buildroot}%{_bindir}/gemini
-
-%check
-%nodejs_symlink_deps --check
+ln -s %{nodejs_sitelib}/%{name}/bundle/gemini.js %{buildroot}%{_bindir}/gemini
 
 %files
 %doc README.md
-%license LICENSE @google-gemini-cli-%{version}-bundled-licenses.txt
+%license LICENSE bundle/bundled/third_party/THIRD_PARTY_NOTICES
 %{_bindir}/gemini
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.37.0-1
+- Update to 0.37.0; package is now pre-bundled (no nodejs-packaging-bundler needed)
+
 * Thu Mar 12 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.33.0-1
 - Initial package (with lots of help from Claude Code)
