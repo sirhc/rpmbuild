@@ -22,6 +22,13 @@ publish spec_file=shell('fd -g "*.spec" | fzf'):
 publish-all:
   fd -g '*.spec' | xargs -I % just publish %
 
+monitor:
+  copr-cli monitor {{ repo }} | mlr --j2p cat
+
+watch:
+  # I don't actually know what the status of in-progress builds is yet.
+  copr-cli watch-build $( copr-cli list-builds {{ repo }} | awk '$3 == "..."' | fzf --multi | awk '{ print $1 }' )
+
 clean spec_file=shell('fd -g "*.spec" | fzf'):
   rm -fv $( just _srcrpm {{ spec_file }} ) $( just _binrpm {{ spec_file }} )
   spectool --list-files {{ spec_file }} | awk '{ print $2 }' | sed -e 's,.*/,,' | xargs -I @ rm -fv '{{ shell("rpm --eval '%{_sourcedir}'") }}/@'
