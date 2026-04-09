@@ -17,7 +17,7 @@ build-all:
   fd -g '*.spec' | xargs -I % just build %
 
 publish spec_file=shell('fd -g "*.spec" | fzf'):
-  copr-cli build {{ repo }} $( just _srcrpm {{ spec_file }} )
+  copr-cli build --nowait {{ repo }} $( just _srcrpm {{ spec_file }} )
 
 publish-all:
   fd -g '*.spec' | xargs -I % just publish %
