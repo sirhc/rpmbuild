@@ -24,7 +24,7 @@ just update <spec-file> <version>
 # Check current version in a spec file
 just current-release <spec-file>
 
-# Check latest upstream release (uses gh CLI against the URL: field)
+# Check latest upstream release (uses gh CLI against the URL: field; requires a GitHub URL)
 just latest-release <spec-file>
 
 # Check for updates across all spec files and update any that are out of date
@@ -47,6 +47,15 @@ just clean <spec-file>
 
 # Open the COPR repo in browser
 just open
+
+# Show current build status for all packages in COPR
+just monitor
+
+# Watch in-progress COPR builds (prompts with fzf if omitted)
+just watch [build-id...]
+
+# Upgrade all COPR-managed packages via dnf
+just upgrade
 ```
 
 ## Spec File Patterns
@@ -55,13 +64,10 @@ just open
 Source binaries are downloaded directly from GitHub releases. The spec uses `%global debug_package %{nil}` since there's nothing to debug. The `%build` section is minimal or empty. See `eza.spec` or `oh-my-posh.spec`.
 
 ### Node.js package
-Uses `%{?nodejs_find_provides_and_requires}` macro, `ExclusiveArch: %{nodejs_arches}`, and `%nodejs_symlink_deps --check` in `%check`. Node.js packages bundle their dependencies using `nodejs-packaging-bundler <npm-package-name>` to generate the bundled tarball sources before building. See `github-copilot.spec` or `gemini-cli.spec`.
+Source from npmjs.org. Uses `%{?nodejs_find_provides_and_requires}` or `%{?nodejs_default_filter}` macro and `ExclusiveArch: %{nodejs_arches}`. When the npm package is pre-bundled, no extra build step is needed; install the bundle dir directly into `%{nodejs_sitelib}/%{name}` and symlink the entry point into `%{_bindir}`. See `github-copilot.spec` or `gemini-cli.spec`.
 
 ### Python package
 Uses `%pyproject_wheel` / `%pyproject_install` / `%pyproject_save_files` macros with `%generate_buildrequires`. See `python-beancount.spec`.
-
-### Haskell package (cabal-rpm generated)
-Uses `ghc-rpm-macros` (`%ghc_lib_build`, `%ghc_lib_install`, etc.) with subpackages for library/devel/doc/prof.
 
 ## Changelog Format
 
