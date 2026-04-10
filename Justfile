@@ -91,6 +91,7 @@ update spec version release='1':
   git commit -m 'Update {{ file_stem(spec) }} to {{ version }}' {{ spec }}
 
   gum confirm 'Build and publish {{ spec }}?'
+  just clean {{ spec }}
   just build-source {{ spec }}
   just publish {{ spec }}
   just clean {{ spec }}
