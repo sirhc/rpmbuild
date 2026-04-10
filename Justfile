@@ -31,10 +31,9 @@ publish-all:
 monitor:
   copr-cli monitor {{ repo }} | mlr --j2p cat
 
-# Watch in-progress COPR builds (select with fzf)
-watch:
-  # I don't actually know what the status of in-progress builds is yet.
-  copr-cli watch-build $( copr-cli list-builds {{ repo }} | awk '$3 == "..."' | fzf --multi | awk '{ print $1 }' )
+# Watch in-progress COPR builds
+watch *build-id=`copr-cli list-builds personal | fzf --multi | awk '{ print $1 }'`:
+  copr-cli watch-build {{ build-id }}
 
 # Remove build artifacts for a spec file
 clean spec_file=shell('fd -g "*.spec" | fzf'):
