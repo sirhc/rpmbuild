@@ -3,8 +3,8 @@
 %{?nodejs_find_provides_and_requires}
 
 Name:           github-copilot
-Version:        1.0.21
-Release:        4%{?dist}
+Version:        1.0.23
+Release:        1%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -54,6 +54,9 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Fri Apr 10 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.23-1
+- Update to 1.0.23
+
 * Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.21-4
 - Remove computer.node which links against libjpeg.so.8 unavailable on Fedora
 
