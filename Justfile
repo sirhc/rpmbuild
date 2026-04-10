@@ -32,7 +32,7 @@ monitor:
   copr-cli monitor {{ repo }} | mlr --j2p cat
 
 # Watch in-progress COPR builds
-watch *build-id=`copr-cli list-builds personal | fzf --multi | awk '{ print $1 }'`:
+watch *build-id=shell('copr-cli list-builds ' + repo + ' | fzf --multi | awk "{ print \$1 }" | tr "\n" " "'):
   copr-cli watch-build {{ build-id }}
 
 # Remove build artifacts for a spec file
