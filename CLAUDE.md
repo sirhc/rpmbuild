@@ -18,7 +18,7 @@ just build-source <spec-file>
 # Publish a built source RPM to COPR
 just publish <spec-file>
 
-# Update a spec file to a new version and publish
+# Update a spec file to a new version, then interactively commit, build, and publish
 just update <spec-file> <version>
 
 # Check current version in a spec file
@@ -56,12 +56,20 @@ just watch [build-id...]
 
 # Upgrade all COPR-managed packages via dnf
 just upgrade
+
+# Upgrade packages installed outside COPR (granted, miller) directly from GitHub releases
+just others
 ```
 
 ## Spec File Patterns
 
 ### Pre-built binary (most common)
-Source binaries are downloaded directly from GitHub releases. The spec uses `%global debug_package %{nil}` since there's nothing to debug. The `%build` section is minimal or empty. See `eza.spec` or `oh-my-posh.spec`.
+Source binaries are downloaded directly from GitHub releases. The spec uses `%global debug_package %{nil}` since there's nothing to debug. The `%build` section is minimal or empty. Use `ExclusiveArch: x86_64` when binaries are only published for that architecture. See `eza.spec` or `oh-my-posh.spec`.
+
+**Tarball extraction:** Most pre-built binary tarballs are flat (no top-level directory), so use `%setup -c %{name}-%{version}` to wrap extraction in a named dir. If the tarball has a named top-level directory, use `%setup -n <dir-name>` instead. For standard source tarballs that follow RPM naming conventions, use `%autosetup`.
+
+### Script/noarch package
+For shell scripts or other architecture-independent content, use `BuildArch: noarch` instead of `%global debug_package %{nil}`. See `wd.spec`.
 
 ### Node.js package
 Source from npmjs.org. Uses `%{?nodejs_find_provides_and_requires}` or `%{?nodejs_default_filter}` macro and `ExclusiveArch: %{nodejs_arches}`. When the npm package is pre-bundled, no extra build step is needed; install the bundle dir directly into `%{nodejs_sitelib}/%{name}` and symlink the entry point into `%{_bindir}`. See `github-copilot.spec` or `gemini-cli.spec`.
@@ -78,7 +86,7 @@ Entries must follow this exact format (author is always Chris Grau):
 - <description>
 ```
 
-The `just update` recipe generates this automatically using `strftime`.
+The `just update` recipe generates this automatically using `strftime`. Always verify that the day-of-week abbreviation matches the actual date — this is a common mistake. Single-digit days are padded with a space, not a zero (e.g., `Apr  7` not `Apr 07`).
 
 ## Key Tools Required
 
