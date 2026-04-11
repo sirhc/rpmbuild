@@ -23,14 +23,18 @@ of your input.
 
 %install
 install -Dpm 0755 zsh-patina %{buildroot}%{_bindir}/zsh-patina
+install -dm 0755 %{buildroot}%{_datadir}/zsh/site-functions
+./zsh-patina completion > %{buildroot}%{_datadir}/zsh/site-functions/_%{name}
 
 %files
 %license LICENSE
 %{_bindir}/zsh-patina
+%{_datadir}/zsh/site-functions/_%{name}
 
 %changelog
 * Sat Apr 11 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.4.0-1
 - Update to 1.4.0
+- Add zsh completion file
 
 * Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.3.1-1
 - Initial package
