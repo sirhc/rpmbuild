@@ -1,5 +1,5 @@
 Name:           zsh-patina
-Version:        1.3.1
+Version:        1.4.0
 Release:        1%{?dist}
 Summary:        A blazingly fast Zsh syntax highlighter
 
@@ -29,5 +29,8 @@ install -Dpm 0755 zsh-patina %{buildroot}%{_bindir}/zsh-patina
 %{_bindir}/zsh-patina
 
 %changelog
+* Sat Apr 11 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.4.0-1
+- Update to 1.4.0
+
 * Wed Apr 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.3.1-1
 - Initial package
