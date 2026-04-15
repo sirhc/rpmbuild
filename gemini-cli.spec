@@ -6,7 +6,7 @@
 %{?nodejs_default_filter}
 
 Name:           gemini-cli
-Version:        0.37.1
+Version:        0.38.1
 Release:        1%{?dist}
 Summary:        An open-source AI agent that brings the power of Gemini directly into your terminal
 License:        Apache-2.0
@@ -45,6 +45,9 @@ ln -s %{nodejs_sitelib}/%{name}/bundle/gemini.js %{buildroot}%{_bindir}/gemini
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Wed Apr 15 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.38.1-1
+- Update to 0.38.1
+
 * Thu Apr 09 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.37.1-1
 - Update to 0.37.1
 
