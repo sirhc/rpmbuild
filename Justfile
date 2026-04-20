@@ -108,10 +108,12 @@ others:
   #!/usr/bin/env -S zsh -e
   v_granted=$( just _latest fwdcloudsec/granted )
   v_miller=$( just _latest johnkerl/miller )
+  v_ticker=$( just _latest achannarasappa/ticker )
 
   sudo dnf upgrade \
     https://github.com/fwdcloudsec/granted/releases/download/$v_granted/granted_$( tr -d v <<< $v_granted )_linux_amd64.rpm \
-    https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm
+    https://github.com/johnkerl/miller/releases/download/$v_miller/miller-$( tr -d v <<< $v_miller )-linux-amd64.rpm \
+    https://github.com/achannarasappa/ticker/releases/download/$v_ticker/ticker-$( tr -d v <<< $v_ticker )-linux-amd64.rpm
 
 # Print the current version from a spec file
 current-release spec_file=shell('fd -g "*.spec" | fzf'):
