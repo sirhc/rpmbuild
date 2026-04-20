@@ -66,7 +66,7 @@ just others
 ### Pre-built binary (most common)
 Source binaries are downloaded directly from GitHub releases. The spec uses `%global debug_package %{nil}` since there's nothing to debug. The `%build` section is minimal or empty. Use `ExclusiveArch: x86_64` when binaries are only published for that architecture. See `eza.spec` or `oh-my-posh.spec`.
 
-**Tarball extraction:** Most pre-built binary tarballs are flat (no top-level directory), so use `%setup -c %{name}-%{version}` to wrap extraction in a named dir. If the tarball has a named top-level directory, use `%setup -n <dir-name>` instead. For standard source tarballs that follow RPM naming conventions, use `%autosetup`.
+**Tarball extraction:** Most pre-built binary tarballs are flat (no top-level directory), so use `%setup -c %{name}-%{version}` to wrap extraction in a named dir. If the tarball has a named top-level directory, use `%setup -n <dir-name>` instead (the dir name may include `%{_arch}` when the release asset embeds the architecture). For standard source tarballs that follow RPM naming conventions, use `%autosetup`.
 
 ### Script/noarch package
 For shell scripts or other architecture-independent content, use `BuildArch: noarch` instead of `%global debug_package %{nil}`. See `wd.spec`.
@@ -86,7 +86,7 @@ Entries must follow this exact format (author is always Chris Grau):
 - <description>
 ```
 
-The `just update` recipe generates this automatically using `strftime`. Always verify that the day-of-week abbreviation matches the actual date — this is a common mistake. Single-digit days are padded with a space, not a zero (e.g., `Apr  7` not `Apr 07`).
+The `just update` recipe generates this automatically using `strftime` and always sets `Release` back to `1`. To bump the release without changing the version (e.g., for a packaging fix), edit the spec manually. Always verify that the day-of-week abbreviation matches the actual date — this is a common mistake. Single-digit days are padded with a space, not a zero (e.g., `Apr  7` not `Apr 07`).
 
 ## Key Tools Required
 
@@ -96,3 +96,4 @@ The `just update` recipe generates this automatically using `strftime`. Always v
 - `fd`, `fzf` — used in Justfile for interactive spec selection
 - `gum` — used in `just update` for interactive confirmation prompts
 - `sponge` — used in `just update` for in-place file editing
+- `mlr` (Miller) — used in `just monitor` to pretty-print COPR JSON output
