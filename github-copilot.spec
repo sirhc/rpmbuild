@@ -4,7 +4,7 @@
 
 Name:           github-copilot
 Version:        1.0.43
-Release:        1%{?dist}
+Release:        3%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -34,10 +34,21 @@ cp -pr $(ls -A | grep -v -e README.md -e LICENSE.md) \
   %{buildroot}%{nodejs_sitelib}/%{name}
 
 find %{buildroot} -depth -wholename '*/*darwin*' -delete
+find %{buildroot} -depth -wholename '*/*freebsd*' -delete
+find %{buildroot} -depth -wholename '*/*openbsd*' -delete
+find %{buildroot} -depth -wholename '*/*win32*' -delete
 find %{buildroot} -depth -wholename '*/*linux-arm*' -delete
+find %{buildroot} -depth -wholename '*/*linux-armhf*' -delete
+find %{buildroot} -depth -wholename '*/*linux-aarch64*' -delete
+find %{buildroot} -depth -wholename '*/*linux-loong*' -delete
+find %{buildroot} -depth -wholename '*/*linux-riscv*' -delete
 find %{buildroot} -depth -wholename '*/*linux-ia32*' -delete
 find %{buildroot} -depth -wholename '*/*linuxmusl*' -delete
-find %{buildroot} -depth -wholename '*/*win32*' -delete
+find %{buildroot} -depth -type d -name 'arm64' ! -path '*/prebuilds/*' -exec rm -rf {} + 2>/dev/null || true
+find %{buildroot} -depth -type d -name 'armhf' ! -path '*/prebuilds/*' -exec rm -rf {} + 2>/dev/null || true
+find %{buildroot} -depth -type d -name 'freebsd*' -exec rm -rf {} + 2>/dev/null || true
+find %{buildroot} -depth -path '*/koffi/build/koffi/*' ! -name 'linux_x64' -type d -exec rm -rf {} + 2>/dev/null || true
+find %{buildroot} -depth -path '*/mxc-bin/arm64' -exec rm -rf {} + 2>/dev/null || true
 # computer.node links against libjpeg.so.8 which is unavailable on Fedora
 rm -f %{buildroot}%{nodejs_sitelib}/%{name}/prebuilds/linux-x64/computer.node
 
@@ -54,6 +65,12 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Fri May 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.43-3
+- Try again
+
+* Fri May 08 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.43-2
+- Remove additional pre-built binaries being picked up by the dependency scanner
+
 * Thu May 07 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.43-1
 - Update to 1.0.43
 
