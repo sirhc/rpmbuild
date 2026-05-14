@@ -2,7 +2,7 @@
 %global pypi_name task_tui
 
 Name:           python3-%{srcname}
-Version:        1.5.0
+Version:        1.6.0
 Release:        1%{?dist}
 Summary:        A TUI frontend for Taskwarrior
 
@@ -42,6 +42,9 @@ cp %{SOURCE0} %{_pyproject_wheeldir}/
 %{_bindir}/task-tui
 
 %changelog
+* Thu May 14 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.6.0-1
+- Update to 1.6.0
+
 * Wed May 13 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.5.0-1
 - Update to 1.5.0
 
