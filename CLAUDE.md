@@ -9,17 +9,17 @@ This is a collection of RPM spec files for packages published to a personal [Fed
 ## Common Commands
 
 ```bash
-# Build a specific spec file (prompts with fzf if omitted)
+# Download sources and build binary and source RPMs (prompts with fzf if omitted)
 just build <spec-file>
 
-# Build source RPM only
+# Download sources and build source RPM only (prompts with fzf if omitted)
 just build-source <spec-file>
 
 # Publish a built source RPM to COPR
 just publish <spec-file>
 
 # Update a spec file to a new version, then interactively commit, build, and publish
-just update <spec-file> <version>
+just update <spec-file> <version> [release]
 
 # Check current version in a spec file
 just current-release <spec-file>
@@ -42,7 +42,7 @@ just publish-all
 # Install a package directly from COPR
 just install <spec-file>
 
-# Clean build artifacts for a spec
+# Remove build artifacts for a spec file
 just clean <spec-file>
 
 # Open the COPR repo in browser
@@ -51,7 +51,7 @@ just open
 # Show current build status for all packages in COPR
 just monitor
 
-# Watch in-progress COPR builds (prompts with fzf if omitted)
+# Watch in-progress COPR builds; accepts multiple build IDs or prompts with fzf
 just watch [build-id...]
 
 # Upgrade all COPR-managed packages via dnf
