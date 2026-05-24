@@ -2,8 +2,8 @@
 %global __requires_exclude ^libc\\.so|^ld-linux|^libc\\+\\+|^libcxxrt|^libm\\.so|^libpthread|^libgcc_s|^libstdc\\+\\+|^\\(npm\\(detect-libc\\)
 
 Name:           github-copilot
-Version:        1.0.51
-Release:        4%{?dist}
+Version:        1.0.52
+Release:        1%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -64,6 +64,9 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Sun May 24 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.52-1
+- Update to 1.0.52
+
 * Sat May 23 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.51-4
 - Fix requires_exclude to match rich npm() dependency form
 
