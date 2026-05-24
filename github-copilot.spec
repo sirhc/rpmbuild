@@ -1,9 +1,9 @@
 %global debug_package %{nil}
-%global __requires_exclude ^libc\\.so|^ld-linux|^libc\\+\\+|^libcxxrt|^libm\\.so|^libpthread|^libgcc_s|^libstdc\\+\\+
+%global __requires_exclude ^libc\\.so|^ld-linux|^libc\\+\\+|^libcxxrt|^libm\\.so|^libpthread|^libgcc_s|^libstdc\\+\\+|^\\(npm\\(detect-libc\\)
 
 Name:           github-copilot
 Version:        1.0.51
-Release:        1%{?dist}
+Release:        4%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -64,6 +64,15 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Sat May 23 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.51-4
+- Fix requires_exclude to match rich npm() dependency form
+
+* Sat May 23 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.51-3
+- Use nodejs_default_filter to suppress bundled npm() auto-requires
+
+* Sat May 23 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.51-2
+- Exclude bundled npm(detect-libc) from auto-generated requires
+
 * Fri May 22 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.51-1
 - Update to 1.0.51
 
