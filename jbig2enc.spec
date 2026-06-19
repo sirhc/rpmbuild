@@ -1,5 +1,5 @@
 Name:           jbig2enc
-Version:        0.31
+Version:        0.32
 Release:        1%{?dist}
 Summary:        JBIG2 encoder
 
@@ -36,5 +36,8 @@ chmod 0755 %{buildroot}%{_bindir}/jbig2topdf.py
 %{_bindir}/jbig2topdf.py
 
 %changelog
+* Fri Jun 19 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.32-1
+- Update to 0.32
+
 * Sun May 17 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.31-1
 - Initial package
