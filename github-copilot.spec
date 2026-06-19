@@ -2,7 +2,7 @@
 %global __requires_exclude ^libc\\.so|^ld-linux|^libc\\+\\+|^libcxxrt|^libm\\.so|^libpthread|^libgcc_s|^libstdc\\+\\+|^\\(npm\\(detect-libc\\)
 
 Name:           github-copilot
-Version:        1.0.61
+Version:        1.0.63
 Release:        1%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
@@ -64,6 +64,9 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Fri Jun 19 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.63-1
+- Update to 1.0.63
+
 * Fri Jun 12 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.61-1
 - Update to 1.0.61
 
