@@ -1,5 +1,5 @@
 Name:           television
-Version:        0.15.8
+Version:        0.15.9
 Release:        1%{?dist}
 Summary:        A general purpose fuzzy finder TUI
 
@@ -34,6 +34,9 @@ install -Dpm 0644 doc/tv.1 %{buildroot}%{_mandir}/man1/tv.1
 %{_mandir}/man1/tv.1*
 
 %changelog
+* Fri Jun 19 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.15.9-1
+- Update to 0.15.9
+
 * Fri Jun 12 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.15.8-1
 - Update to 0.15.8
 
