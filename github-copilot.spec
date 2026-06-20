@@ -1,9 +1,9 @@
 %global debug_package %{nil}
-%global __requires_exclude ^libc\\.so|^ld-linux|^libc\\+\\+|^libcxxrt|^libm\\.so|^libpthread|^libgcc_s|^libstdc\\+\\+|^\\(npm\\(detect-libc\\)
+%global __requires_exclude ^libc\\.so|^ld-linux|^libc\\+\\+|^libcxxrt|^libm\\.so|^libpthread|^libgcc_s|^libstdc\\+\\+|^\\(npm\\(detect-libc\\)|^\\(npm\\(os-theme\\)
 
 Name:           github-copilot
 Version:        1.0.63
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GitHub Copilot CLI
 License:        https://docs.github.com/en/site-policy/github-terms/github-pre-release-license-terms
 URL:            https://github.com/github/copilot-cli
@@ -64,6 +64,9 @@ ln -s %{nodejs_sitelib}/%{name}/index.js %{buildroot}%{_bindir}/copilot
 %{nodejs_sitelib}/%{name}
 
 %changelog
+* Sat Jun 20 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.63-2
+- Exclude bundled npm(os-theme) from auto-generated requires
+
 * Fri Jun 19 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.63-1
 - Update to 1.0.63
 
