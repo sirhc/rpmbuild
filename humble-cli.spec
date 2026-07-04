@@ -7,8 +7,8 @@
 %endif
 
 Name:           humble-cli
-Version:        0.23.0
-Release:        2%{?dist}
+Version:        0.23.1
+Release:        1%{?dist}
 Summary:        The missing CLI for downloading your Humble Bundle purchases
 
 License:        MIT
@@ -47,6 +47,9 @@ install -Dpm 0755 %{name}-linux-%{go_arch} %{buildroot}%{_bindir}/%{name}
 %{_datadir}/fish/vendor_completions.d/%{name}.fish
 
 %changelog
+* Sat Jul 04 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.1-1
+- Update to 0.23.1
+
 * Tue Jun  2 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.0-2
 - Add shell completions for bash, zsh, and fish
 
