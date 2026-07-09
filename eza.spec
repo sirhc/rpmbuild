@@ -1,6 +1,6 @@
 Name:           eza
-Version:        0.23.4
-Release:        2%{?dist}
+Version:        0.23.5
+Release:        1%{?dist}
 Summary:        A modern alternative to ls
 
 License:        EUPL 1.2
@@ -51,6 +51,9 @@ install -Dpm 0644 eza_colors-explanation.5 %{buildroot}%{_mandir}/man5/eza_color
 %{_mandir}/man5/eza_colors-explanation.5*
 
 %changelog
+* Thu Jul 09 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.5-1
+- Update to 0.23.5
+
 * Mon Nov 17 2025 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.4-2
 - Add man pages
 
