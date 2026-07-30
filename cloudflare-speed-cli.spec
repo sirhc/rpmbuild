@@ -1,5 +1,5 @@
 Name:           cloudflare-speed-cli
-Version:        1.0.7
+Version:        1.0.8
 Release:        1%{?dist}
 Summary:        CLI for internet speed test via Cloudflare
 
@@ -28,6 +28,9 @@ install -Dpm 0755 cloudflare-speed-cli %{buildroot}%{_bindir}/cloudflare-speed-c
 %{_bindir}/cloudflare-speed-cli
 
 %changelog
+* Thu Jul 30 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.8-1
+- Update to 1.0.8
+
 * Wed Jul 22 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.7-1
 - Update to 1.0.7
 
