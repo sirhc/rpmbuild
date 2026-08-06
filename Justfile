@@ -1,3 +1,4 @@
+set quiet
 set shell := ['zsh', '-cu']
 
 copr := 'copr:copr.fedorainfracloud.org:cgrau:' + repo
@@ -117,21 +118,21 @@ others:
 
 # Print the current version from a spec file
 current-release spec_file=shell('fd -g "*.spec" | fzf'):
-  @awk '$1 == "Version:" { print $2 }' {{ spec_file }}
+  awk '$1 == "Version:" { print $2 }' {{ spec_file }}
 
 # Print the latest upstream release tag from GitHub
 latest-release spec_file=shell('fd -g "*.spec" | fzf'):
-  @awk '$1 == "URL:" { print $2 }' {{ spec_file }} | xargs gh release list --jq 'map(select(.isLatest))[].tagName' --json isLatest,tagName --repo
+  awk '$1 == "URL:" { print $2 }' {{ spec_file }} | xargs gh release list --jq 'map(select(.isLatest))[].tagName' --json isLatest,tagName --repo
 
 # List upstream releases for a spec file
 list-releases spec_file=shell('fd -g "*.spec" | fzf'):
   spectool --source 0 {{ spec_file }} | cut -d / -f 4,5 | xargs gh release list --repo
 
 _srcrpm spec_file:
-  @rpm --eval "%{_srcrpmdir}/$( rpmspec --srpm -q --qf '%{name}-%{version}-%{release}\n' {{ spec_file }} ).src.rpm"
+  rpm --eval "%{_srcrpmdir}/$( rpmspec --srpm -q --qf '%{name}-%{version}-%{release}\n' {{ spec_file }} ).src.rpm"
 
 _binrpm spec_file:
-  @rpm --eval "%{_rpmdir}/$( rpmspec --srpm -q --qf '%{arch}/%{name}-%{version}-%{release}.%{arch}\n' {{ spec_file }} ).rpm"
+  rpm --eval "%{_rpmdir}/$( rpmspec --srpm -q --qf '%{arch}/%{name}-%{version}-%{release}.%{arch}\n' {{ spec_file }} ).rpm"
 
 _latest repo:
   gh release list --repo {{ repo }} --json 'isLatest,tagName' --jq '.[] | select(.isLatest) | .tagName'
