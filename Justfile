@@ -92,10 +92,10 @@ update spec version release='1':
     sponge {{ spec }}
 
   git diff {{ spec }}
-  gum confirm 'Commit changes to {{ spec }}?'
+  gum confirm 'Commit changes to {{ spec }}?' || exit 0
   git commit -m 'Update {{ file_stem(spec) }} to {{ version }}' {{ spec }}
 
-  gum confirm 'Build and publish {{ spec }}?'
+  gum confirm 'Build and publish {{ spec }}?' || exit 0
   just clean {{ spec }}
   just build-source {{ spec }}
   just publish {{ spec }}
