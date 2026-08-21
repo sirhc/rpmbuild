@@ -8,7 +8,7 @@ Release:        1%{?dist}
 Summary:        Simple PDF generation for Python
 
 License:        LGPL-3.0-only
-URL:            https://py-pdf.github.io/fpdf2/
+URL:            https://github.com/py-pdf/fpdf2
 Source0:        %{pypi_source %{pypi_name}}
 
 BuildArch:      noarch

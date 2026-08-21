@@ -55,6 +55,11 @@ update-packages:
       continue
     fi
 
+    if [[ -z "$( awk '$1 == "URL:" && $2 ~ /github.com/' $spec )" ]]; then
+      print "Source in $spec is not from GitHub, skipping update"
+      continue
+    fi
+
     current="$( just current-release $spec )"
     latest="$( just latest-release $spec )"
 
