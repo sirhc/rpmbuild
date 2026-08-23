@@ -7,8 +7,8 @@
 %endif
 
 Name:           hister
-Version:        0.17.0
-Release:        2%{?dist}
+Version:        0.18.0
+Release:        1%{?dist}
 Summary:        Your own search engine
 
 License:        AGPL-3.0-only
@@ -69,6 +69,9 @@ install -Dpm 0644 %{name}.service %{buildroot}%{_userunitdir}/%{name}.service
 %systemd_user_postun_with_restart %{name}.service
 
 %changelog
+* Sun Aug 23 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.18.0-1
+- Update to 0.18.0
+
 * Mon Aug  3 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.17.0-2
 - Add systemd service
 
