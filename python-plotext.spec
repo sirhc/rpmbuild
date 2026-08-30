@@ -1,7 +1,7 @@
 %global srcname plotext
 
 Name:           python3-%{srcname}
-Version:        5.3.2
+Version:        6.0.0
 Release:        1%{?dist}
 Summary:        Plotting library for terminal output
 
@@ -40,5 +40,8 @@ capabilities of the print function.
 %{_bindir}/plotext
 
 %changelog
+* Sun Aug 30 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 6.0.0-1
+- Update to 6.0.0
+
 * Fri Aug 21 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 5.3.2-1
 - Initial package
