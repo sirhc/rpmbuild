@@ -7,7 +7,7 @@
 %endif
 
 Name:           humble-cli
-Version:        0.23.1
+Version:        0.23.2
 Release:        1%{?dist}
 Summary:        The missing CLI for downloading your Humble Bundle purchases
 
@@ -47,6 +47,9 @@ install -Dpm 0755 %{name}-linux-%{go_arch} %{buildroot}%{_bindir}/%{name}
 %{_datadir}/fish/vendor_completions.d/%{name}.fish
 
 %changelog
+* Sun Aug 30 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.2-1
+- Update to 0.23.2
+
 * Sat Jul 04 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.1-1
 - Update to 0.23.1
 
