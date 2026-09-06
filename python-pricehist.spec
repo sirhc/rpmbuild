@@ -2,7 +2,7 @@
 
 Name:           python3-%{srcname}
 Version:        1.4.16
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Fetch and format historical price data
 
 License:        MIT
@@ -27,6 +27,10 @@ plain-text accounting systems such as hledger, ledger, and beancount.
 
 %prep
 %autosetup -n %{srcname}-%{version}
+# Upstream caps curlify at <3.0.0 via Poetry's default caret pin, but the sole
+# use is a cosmetic to_curl() call that works unchanged on 3.x. Relax it so the
+# generated dependency doesn't block python3-curlify 3.0.0.
+sed -i 's/^curlify = .*/curlify = ">=2.2.1"/' pyproject.toml
 
 %generate_buildrequires
 %pyproject_buildrequires
@@ -45,5 +49,8 @@ plain-text accounting systems such as hledger, ledger, and beancount.
 %{_bindir}/pricehist
 
 %changelog
+* Sun Sep  6 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.4.16-2
+- Relax the curlify <3.0.0 pin to allow python3-curlify 3.0.0
+
 * Fri Aug 21 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.4.16-1
 - Initial package
