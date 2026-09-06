@@ -34,7 +34,7 @@ The project uses `just` to handle common packaging tasks. Many commands will pro
   ```bash
   just current-release <spec-file>
   ```
-- **Check latest upstream release:**
+- **Check latest upstream release (PyPI if Source0 pulls from pythonhosted.org, else GitHub):**
   ```bash
   just latest-release <spec-file>
   ```
@@ -87,11 +87,11 @@ The project uses `just` to handle common packaging tasks. Many commands will pro
 
 ### Spec File Patterns
 
-- **Pre-built binaries (Most Common):** Usually GitHub releases. Use `%global debug_package %{nil}` since there is nothing to debug. Use `ExclusiveArch: x86_64` if applicable.
-  - **Tarball extraction:** Most pre-built binary tarballs are flat (no top-level directory), so use `%setup -c %{name}-%{version}` to wrap extraction in a named dir. If the tarball has a named top-level directory, use `%setup -n <dir-name>` instead. For standard source tarballs following RPM naming conventions, use `%autosetup`.
-- **Node.js packages:** Source from npmjs.org. Use `%{?nodejs_find_provides_and_requires}` or `%{?nodejs_default_filter}` and `ExclusiveArch: %{nodejs_arches}`. For pre-bundled packages, install the bundle directory directly to `%{nodejs_sitelib}/%{name}` and symlink entry points.
-- **Python packages:** Use `%pyproject_wheel` / `%pyproject_install` / `%pyproject_save_files` macros with `%generate_buildrequires`.
-- **Shell scripts:** Use `BuildArch: noarch`.
+- **Pre-built binaries (Most Common):** Usually GitHub releases. Use `%global debug_package %{nil}` since there is nothing to debug. Use `ExclusiveArch: x86_64` if applicable. See `eza.spec` or `oh-my-posh.spec`.
+  - **Tarball extraction:** Most pre-built binary tarballs are flat (no top-level directory), so use `%setup -c %{name}-%{version}` to wrap extraction in a named dir. If the tarball has a named top-level directory, use `%setup -n <dir-name>` instead (the dir name may include `%{_arch}` when the release asset embeds the architecture). For standard source tarballs following RPM naming conventions, use `%autosetup`.
+- **Node.js packages:** Source from npmjs.org. Use `%{?nodejs_find_provides_and_requires}` or `%{?nodejs_default_filter}` and `ExclusiveArch: %{nodejs_arches}`. For pre-bundled packages, install the bundle directory directly to `%{nodejs_sitelib}/%{name}` and symlink entry points. (No example currently in the repo.)
+- **Python packages:** Use `%pyproject_wheel` / `%pyproject_install` / `%pyproject_save_files` macros with `%generate_buildrequires`. Source0 pulls from `files.pythonhosted.org`. See `python-todoman.spec` or `python-fpdf2.spec`. `proselint.spec` shows `%prep` seds that patch upstream metadata.
+- **Shell scripts:** Use `BuildArch: noarch`. See `wd.spec`.
 
 ### Changelog Format
 
@@ -102,12 +102,32 @@ Changelog entries must follow this exact format (author is always Chris Grau):
 ```
 *Note: The `just update` recipe automatically generates this format and sets `Release` back to `1`. For manual packaging fixes without a version bump, edit the spec manually. Always check that the day-of-week abbreviation matches the actual date, and single-digit days are padded with a space (e.g., `Apr  7`, not `Apr 07`).*
 
+### Upstream Update Detection
+
+`just update-packages` walks every spec and decides the source of truth for versions:
+- If `Source0` resolves to a `pythonhosted.org` URL, it queries the PyPI JSON API.
+- Else if `URL:` is a github.com URL, it uses `just latest-release` (via `gh`).
+- Otherwise the spec is skipped.
+
+Version-comparison uses `sort -V`, so it also catches downgrades/mismatches, not just newer releases.
+
+#### X-Update-Block directive
+
+A spec may carry a comment line:
+
+```text
+# X-Update-Block: <version> <reason>
+```
+
+`update-packages` will then skip any upstream release **at or above** `<version>`. Use this when upstream ships a release the package can't take yet (e.g. `python-plotext.spec` blocks plotext 6, which breaks `python-textual-plotext`). Remove the directive once the blocker is resolved.
+
 ### Tool Requirements
 
 Ensure the following tools are installed for full functionality:
 - `rpmbuild`, `rpmdevtools` (for `spectool`, `rpmspec`)
 - `copr-cli`
 - `gh` (GitHub CLI)
+- `jq`, `curl` (used for PyPI update checks)
 - `just`
 - `fd`, `fzf`, `gum`, `sponge` (from `moreutils`), `mlr` (Miller)
 
