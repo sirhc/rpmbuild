@@ -55,20 +55,27 @@ update-packages:
       continue
     fi
 
-    if [[ -z "$( awk '$1 == "URL:" && $2 ~ /github.com/' $spec )" ]]; then
-      print "Source in $spec is not from GitHub, skipping update"
+    # Source0 that resolves to a pythonhosted.org URL means PyPI is where the
+    # build actually pulls from, so PyPI is the source of truth for versions.
+    pypi_url="$( rpmspec -P $spec 2>/dev/null | awk '$1 == "Source0:" && $2 ~ /pythonhosted/ { print $2 }' )"
+
+    if [[ -n $pypi_url ]]; then
+      latest="$( curl -fsSL "https://pypi.org/pypi/$( cut -d / -f 7 <<< $pypi_url )/json" | jq -r .info.version )"
+    elif [[ -n "$( awk '$1 == "URL:" && $2 ~ /github.com/' $spec )" ]]; then
+      latest="$( just latest-release $spec )"
+      latest=${latest#v}   # a lot of GitHub releases use `vX.Y.Z`
+      latest=${latest#*-}  # for some reason, `mdcat` uses `mdcat-X.Y.Z`
+    else
+      print "Source in $spec is not from PyPI or GitHub, skipping update"
+      continue
+    fi
+
+    if [[ -z $latest || $latest == null ]]; then
+      print "No releases found for $spec, skipping update"
       continue
     fi
 
     current="$( just current-release $spec )"
-    latest="$( just latest-release $spec )"
-    latest=${latest#v}   # a lot of GitHub releases use `vX.Y.Z`
-    latest=${latest#*-}  # for some reason, `mdcat` uses `mdcat-X.Y.Z`
-
-    if [[ -z $latest ]]; then
-      print "No releases found for $spec, skipping update"
-      continue
-    fi
 
     # Honor a "# X-Update-Block: <version> <reason>" directive in the spec: skip
     # any upstream release at or above <version>. Used when upstream ships a
@@ -86,7 +93,7 @@ update-packages:
       continue
     fi
 
-    just update $spec ${latest#v}
+    just update $spec $latest
   done
 
 # Update a spec file to a new version, commit, build, and publish
@@ -140,9 +147,16 @@ others:
 current-release spec_file=shell('fd -g "*.spec" | fzf'):
   awk '$1 == "Version:" { print $2 }' {{ spec_file }}
 
-# Print the latest upstream release tag from GitHub
+# Print the latest upstream release (PyPI if Source0 pulls from there, else GitHub)
 latest-release spec_file=shell('fd -g "*.spec" | fzf'):
-  awk '$1 == "URL:" { print $2 }' {{ spec_file }} | xargs gh release list --jq 'map(select(.isLatest))[].tagName' --json isLatest,tagName --repo
+  #!/usr/bin/env -S zsh -e
+  pypi_url="$( rpmspec -P {{ spec_file }} 2>/dev/null | awk '$1 == "Source0:" && $2 ~ /pythonhosted/ { print $2 }' )"
+  if [[ -n $pypi_url ]]; then
+    curl -fsSL "https://pypi.org/pypi/$( cut -d / -f 7 <<< $pypi_url )/json" | jq -r .info.version
+  else
+    awk '$1 == "URL:" { print $2 }' {{ spec_file }} |
+      xargs gh release list --jq 'map(select(.isLatest))[].tagName' --json isLatest,tagName --repo
+  fi
 
 # List upstream releases for a spec file
 list-releases spec_file=shell('fd -g "*.spec" | fzf'):
