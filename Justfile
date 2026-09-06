@@ -92,18 +92,16 @@ update spec version release='1':
     sponge {{ spec }}
 
   git diff {{ spec }}
-  if ! gum confirm 'Commit changes to {{ spec }}?'; then
+  if ! gum confirm 'Commit changes to {{ spec }} and publish?'; then
     git checkout {{ spec }}
     exit 0
   fi
-  git commit -m 'Update {{ file_stem(spec) }} to {{ version }}' {{ spec }}
 
-  if gum confirm 'Build and publish {{ spec }}?'; then
-    just clean {{ spec }}
-    just build-source {{ spec }}
-    just publish {{ spec }}
-    just clean {{ spec }}
-  fi
+  git commit -m 'Update {{ file_stem(spec) }} to {{ version }}' {{ spec }}
+  just clean {{ spec }}
+  just build-source {{ spec }}
+  just publish {{ spec }}
+  just clean {{ spec }}
 
 # Upgrade all COPR-managed packages via dnf
 upgrade:
