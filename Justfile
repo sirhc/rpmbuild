@@ -70,6 +70,15 @@ update-packages:
       continue
     fi
 
+    # Honor a "# X-Update-Block: <version> <reason>" directive in the spec: skip
+    # any upstream release at or above <version>. Used when upstream ships a
+    # release we can't take yet (e.g. plotext 6 breaks python-textual-plotext).
+    block="$( awk '$1 == "#" && $2 == "X-Update-Block:" { print $3 }' $spec )"
+    if [[ -n $block && $latest == $( printf '%s\n' $block $latest | sort -V | tail -n 1 ) ]]; then
+      print "Latest release $latest for $spec is blocked (X-Update-Block: $block), skipping update"
+      continue
+    fi
+
     # A cheap way of determining if the latest release is newer than the
     # current release (python-textual-plotext is the offender here).
     if [[ $current == $( printf '%s\n' $current $latest | sort -V | tail -n 1 ) ]]; then

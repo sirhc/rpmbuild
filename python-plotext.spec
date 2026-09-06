@@ -1,5 +1,10 @@
 %global srcname plotext
 
+# X-Update-Block: 6.0.0 upstream beta rewrite; drops the flat 5.x API and
+# plotext._dict/_utility, which breaks python-textual-plotext (and hledger-textual).
+# Also no longer noarch (compiles a C++ kernel). Revisit when 6.x is final and
+# textual-plotext supports it.
+
 Name:           python3-%{srcname}
 Version:        5.3.2
 Release:        1%{?dist}
