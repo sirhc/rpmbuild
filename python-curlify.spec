@@ -1,7 +1,7 @@
 %global srcname curlify
 
 Name:           python3-%{srcname}
-Version:        2.2.1
+Version:        3.0.0
 Release:        1%{?dist}
 Summary:        Convert a python requests request object into a curl command
 
@@ -40,5 +40,8 @@ can be run from a shell.
 %files -f %{pyproject_files}
 
 %changelog
+* Sun Sep 06 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 3.0.0-1
+- Update to 3.0.0
+
 * Fri Aug 21 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.2.1-1
 - Initial package
