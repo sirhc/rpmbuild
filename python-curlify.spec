@@ -40,5 +40,5 @@ can be run from a shell.
 %files -f %{pyproject_files}
 
 %changelog
-* Fri Aug 21 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 3.0.0-1
+* Fri Aug 21 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.2.1-1
 - Initial package
