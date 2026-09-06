@@ -62,13 +62,17 @@ update-packages:
 
     current="$( just current-release $spec )"
     latest="$( just latest-release $spec )"
+    latest=${latest#v}   # a lot of GitHub releases use `vX.Y.Z`
+    latest=${latest#*-}  # for some reason, `mdcat` uses `mdcat-X.Y.Z`
 
-    if [[ -z "$latest" ]]; then
+    if [[ -z $latest ]]; then
       print "No releases found for $spec, skipping update"
       continue
     fi
 
-    if [[ "$current" == "$latest" || "v$current" == "$latest" ]]; then
+    # A cheap way of determining if the latest release is newer than the
+    # current release (python-textual-plotext is the offender here).
+    if [[ $current == $( printf '%s\n' $current $latest | sort -V | tail -n 1 ) ]]; then
       print "Current release $current is up to date for $spec, skipping update"
       continue
     fi
