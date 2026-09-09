@@ -1,5 +1,5 @@
 Name:           mdcat
-Version:        2.15.0
+Version:        2.16.0
 Release:        1%{?dist}
 Summary:        cat for markdown, with syntax highlighting
 
@@ -44,5 +44,8 @@ ln -s mdcat.1.gz %{buildroot}%{_mandir}/man1/mdpick.1.gz
 %{_mandir}/man1/mdpick.1*
 
 %changelog
+* Wed Sep 09 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.16.0-1
+- Update to 2.16.0
+
 * Fri Sep  4 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.15.0-1
 - Initial package
