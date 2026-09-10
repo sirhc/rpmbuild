@@ -1,7 +1,7 @@
 %global srcname linecast
 
 Name:           python3-%{srcname}
-Version:        2.3.3
+Version:        2.4.0
 Release:        1%{?dist}
 Summary:        Weather, tides, the sun, the moon, and maps, drawn for the terminal
 
@@ -43,6 +43,9 @@ accounts or API keys.
 %{_bindir}/linecast
 
 %changelog
+* Thu Sep 10 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.4.0-1
+- Update to 2.4.0
+
 * Wed Sep 09 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.3.3-1
 - Update to 2.3.3
 
