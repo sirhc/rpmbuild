@@ -1,5 +1,5 @@
 Name:           hledger
-Version:        1.52.3
+Version:        1.52.4
 Release:        1%{?dist}
 Summary:        Command-line plain text accounting
 
@@ -53,6 +53,9 @@ install -Dpm 0644 hledger-completion.bash %{buildroot}%{_datadir}/bash-completio
 %{_datadir}/bash-completion/completions/hledger
 
 %changelog
+* Fri Sep 11 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.52.4-1
+- Update to 1.52.4
+
 * Sun Aug 30 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.52.3-1
 - Update to 1.52.3
 
