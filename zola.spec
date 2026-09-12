@@ -1,5 +1,5 @@
 Name:           zola
-Version:        0.23.4
+Version:        0.23.5
 Release:        1%{?dist}
 Summary:        A fast static site generator in a single binary with everything built-in
 
@@ -28,6 +28,9 @@ install -Dpm 0755 zola %{buildroot}%{_bindir}/zola
 %license LICENSE
 
 %changelog
+* Fri Sep 11 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.5-1
+- Update to 0.23.5
+
 * Fri Aug 21 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.23.4-1
 - Update to 0.23.4
 
