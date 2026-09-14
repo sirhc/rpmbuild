@@ -1,8 +1,8 @@
 %global srcname linecast
 
 Name:           python3-%{srcname}
-Version:        2.4.0
-Release:        2%{?dist}
+Version:        2.5.2
+Release:        1%{?dist}
 Summary:        Weather, tides, the sun, the moon, and maps, drawn for the terminal
 
 License:        MIT
@@ -53,6 +53,9 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} %{buildroot}%{_bindir}/linecast comple
 %{_datadir}/fish/vendor_completions.d/linecast.fish
 
 %changelog
+* Mon Sep 14 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.5.2-1
+- Update to 2.5.2
+
 * Sat Sep 12 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.4.0-2
 - Add bash, zsh, and fish shell completions
 
