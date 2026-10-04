@@ -1,7 +1,7 @@
 %global srcname linecast
 
 Name:           python3-%{srcname}
-Version:        2.9.3
+Version:        2.10.0
 Release:        1%{?dist}
 Summary:        Weather, tides, the sun, the moon, and maps, drawn for the terminal
 
@@ -53,6 +53,9 @@ PYTHONPATH=%{buildroot}%{python3_sitelib} %{buildroot}%{_bindir}/linecast comple
 %{_datadir}/fish/vendor_completions.d/linecast.fish
 
 %changelog
+* Sun Oct 04 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.10.0-1
+- Update to 2.10.0
+
 * Thu Oct 01 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.9.3-1
 - Update to 2.9.3
 
