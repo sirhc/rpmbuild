@@ -1,5 +1,5 @@
 Name:           fx
-Version:        39.2.0
+Version:        40.0.0
 Release:        1%{?dist}
 Summary:        Terminal JSON viewer & processor
 
@@ -31,6 +31,9 @@ install -Dpm 0755 %{SOURCE0} %{buildroot}%{_bindir}/%{name}
 %license LICENSE
 
 %changelog
+* Tue Oct 06 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 40.0.0-1
+- Update to 40.0.0
+
 * Mon Feb 16 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 39.2.0-1
 - Update to 39.2.0
 
