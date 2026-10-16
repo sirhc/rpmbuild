@@ -3,7 +3,7 @@
 %global debug_package %{nil}
 
 Name:           antigravity-cli
-Version:        1.3.3
+Version:        1.4.0
 Release:        1%{?dist}
 Summary:        Google Antigravity CLI - Terminal-first surface for Antigravity agents
 License:        Proprietary
@@ -33,6 +33,9 @@ install -p -m 0755 antigravity %{buildroot}%{_bindir}/antigravity
 %{_bindir}/antigravity
 
 %changelog
+* Fri Oct 16 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.4.0-1
+- Update to 1.4.0
+
 * Mon Oct 12 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.3.3-1
 - Update to 1.3.3
 
