@@ -1,5 +1,5 @@
 Name:           zk
-Version:        0.15.6
+Version:        0.15.7
 Release:        1%{?dist}
 Summary:        A plain text note-taking assistant
 
@@ -32,5 +32,8 @@ install -Dpm 0755 zk %{buildroot}%{_bindir}/zk
 %{_bindir}/zk
 
 %changelog
+* Fri Oct 16 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.15.7-1
+- Update to 0.15.7
+
 * Thu Aug 06 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.15.6-1
 - Initial package
