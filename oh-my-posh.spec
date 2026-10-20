@@ -1,5 +1,5 @@
 Name:           oh-my-posh
-Version:        31.8.0
+Version:        31.9.1
 Release:        1%{?dist}
 Summary:        The most customisable and low-latency cross platform/shell prompt renderer
 
@@ -28,6 +28,9 @@ install -Dpm 0755 %{SOURCE0} %{buildroot}%{_bindir}/oh-my-posh
 %license COPYING
 
 %changelog
+* Tue Oct 20 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 31.9.1-1
+- Update to 31.9.1
+
 * Mon Oct 12 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 31.8.0-1
 - Update to 31.8.0
 
