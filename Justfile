@@ -28,6 +28,38 @@ publish spec_file=shell('fd -g "*.spec" | fzf'):
 publish-all:
   fd -g '*.spec' | xargs -I % just publish %
 
+# Publish every spec with no successful build in a chroot (e.g. after enabling a new Fedora release)
+backfill chroot=shell('curl -fsSL "https://copr.fedorainfracloud.org/api_3/project?ownername=cgrau&projectname=' + repo + '" | jq -r ".chroot_repos | keys[]" | fzf'):
+  #!/usr/bin/env -S zsh -e
+
+  # COPR only builds a package for the chroots enabled at submit time, and
+  # update-packages only submits when upstream changes, so a newly enabled
+  # chroot stays empty until something forces a build.
+  # monitor reports the latest build per package per chroot; anything not
+  # failed or canceled (including in-flight builds) counts as present.
+  built=( $( copr-cli monitor {{ repo }} |
+    jq -r --arg c {{ chroot }} '.[] | select(.chroot == $c and (.state | IN("failed", "canceled") | not)) | .name' ) )
+
+  for spec in *.spec; do
+    name="$( rpmspec --srpm -q --qf '%{name}\n' $spec )"
+
+    if (( ${built[(Ie)$name]} )); then
+      continue
+    fi
+
+    if [[ -n "$( git status --porcelain $spec )" ]]; then
+      print "Changes detected in $spec, skipping backfill"
+      continue
+    fi
+
+    # Builds are submitted without waiting, so a package whose dependency is
+    # also being backfilled can fail; rerunning picks up whatever failed.
+    print "Backfilling $name for {{ chroot }}"
+    just build-source $spec
+    copr-cli build --nowait {{ repo }} $( just _srcrpm $spec ) -r {{ chroot }}
+    just clean $spec
+  done
+
 # Show current build status for all packages in COPR
 monitor:
   copr-cli monitor {{ repo }} | mlr --j2p cat

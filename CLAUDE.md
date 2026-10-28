@@ -39,6 +39,9 @@ just build-all
 # Publish all specs
 just publish-all
 
+# Publish every spec with no current build in a chroot (e.g. after enabling a new Fedora release)
+just backfill [chroot]
+
 # Install a package directly from COPR
 just install <spec-file>
 
