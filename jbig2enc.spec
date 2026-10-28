@@ -5,7 +5,7 @@ Summary:        JBIG2 encoder
 
 License:        Apache-2.0
 URL:            https://github.com/agl/jbig2enc
-Source0:        https://github.com/agl/%{name}/releases/download/%{version}/%{name}-%{version}.tar.xz
+Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
