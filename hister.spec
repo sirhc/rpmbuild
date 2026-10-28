@@ -7,7 +7,7 @@
 %endif
 
 Name:           hister
-Version:        0.20.0
+Version:        0.21.0
 Release:        1%{?dist}
 Summary:        Your own search engine
 
@@ -69,6 +69,9 @@ install -Dpm 0644 %{name}.service %{buildroot}%{_userunitdir}/%{name}.service
 %systemd_user_postun_with_restart %{name}.service
 
 %changelog
+* Wed Oct 28 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.21.0-1
+- Update to 0.21.0
+
 * Fri Sep 25 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.20.0-1
 - Update to 0.20.0
 
