@@ -3,7 +3,7 @@
 %global import_name fpdf
 
 Name:           python3-%{srcname}
-Version:        2.8.9
+Version:        2.9.0
 Release:        1%{?dist}
 Summary:        Simple PDF generation for Python
 
@@ -46,6 +46,9 @@ ease of use. It is a fork and the successor of PyFPDF.
 %files -f %{pyproject_files}
 
 %changelog
+* Fri Oct 30 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.9.0-1
+- Update to 2.9.0
+
 * Thu Oct 01 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 2.8.9-1
 - Update to 2.8.9
 
