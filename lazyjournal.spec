@@ -1,5 +1,5 @@
 Name:           lazyjournal
-Version:        0.8.6
+Version:        0.8.7
 Release:        1%{?dist}
 Summary:        TUI for viewing logs from journald, Docker/Podman, and Kubernetes
 
@@ -32,5 +32,8 @@ install -Dpm 0755 %{SOURCE0} %{buildroot}%{_bindir}/lazyjournal
 %{_bindir}/lazyjournal
 
 %changelog
+* Thu Nov 05 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.8.7-1
+- Update to 0.8.7
+
 * Fri Apr 10 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.8.6-1
 - Initial package
