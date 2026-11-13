@@ -29,7 +29,7 @@ install -Dpm 0755 mdcat %{buildroot}%{_bindir}/mdcat
 ln -s mdcat %{buildroot}%{_bindir}/mdless
 ln -s mdcat %{buildroot}%{_bindir}/mdpick
 
-install -Dpm 0644 mdcat.1/mdcat.1 %{buildroot}%{_mandir}/man1/mdcat.1
+install -Dpm 0644 mdcat.1 %{buildroot}%{_mandir}/man1/mdcat.1
 ln -s mdcat.1.gz %{buildroot}%{_mandir}/man1/mdless.1.gz
 ln -s mdcat.1.gz %{buildroot}%{_mandir}/man1/mdpick.1.gz
 
