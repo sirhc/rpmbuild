@@ -1,5 +1,5 @@
 Name:           resticprofile
-Version:        0.33.1
+Version:        0.34.0
 Release:        1%{?dist}
 Summary:        Configuration profiles manager and scheduler for restic backup
 
@@ -34,6 +34,9 @@ install -Dpm 0755 resticprofile %{buildroot}%{_bindir}/resticprofile
 %{_bindir}/resticprofile
 
 %changelog
+* Fri Nov 13 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.34.0-1
+- Update to 0.34.0
+
 * Wed Apr 15 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.33.1-1
 - Update to 0.33.1
 
