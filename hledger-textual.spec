@@ -31,8 +31,6 @@ plain-text accounting, built with the Textual framework.
 %autosetup -n %{pypi_name}-%{version}
 # Relax the uv_build pin to match the version packaged in Fedora
 sed -i 's/uv_build>=0.10.5,<0.11.0/uv_build>=0.10.5,<1.0.0/' pyproject.toml
-# Fedora ships textual 4.0.0; upstream currently pins <4
-sed -i "s/textual>=3.0.0,<4/textual>=3.0.0/" pyproject.toml
 
 %generate_buildrequires
 %pyproject_buildrequires -p
