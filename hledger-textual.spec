@@ -2,7 +2,7 @@
 %global pypi_name hledger_textual
 
 Name:           python3-%{srcname}
-Version:        0.8.0
+Version:        1.0.0
 Release:        1%{?dist}
 Summary:        A full-featured terminal user interface for hledger plain-text accounting
 
@@ -49,6 +49,9 @@ sed -i 's/uv_build>=0.10.5,<0.11.0/uv_build>=0.10.5,<1.0.0/' pyproject.toml
 %{_bindir}/hledger-textual
 
 %changelog
+* Tue Nov 17 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 1.0.0-1
+- Update to 1.0.0
+
 * Sun Nov 15 2026 Chris Grau <113591+sirhc@users.noreply.github.com> - 0.8.0-1
 - Update to 0.8.0
 
