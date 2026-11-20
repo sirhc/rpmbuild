@@ -22,6 +22,7 @@ build-all:
 
 # Upload a built source RPM to COPR
 publish spec_file=shell('fd -g "*.spec" | fzf'):
+  [[ -e $( just _srcrpm {{ spec_file }} ) ]] || just build-source {{ spec_file }}
   copr-cli build --nowait {{ repo }} $( just _srcrpm {{ spec_file }} )
 
 # Publish all spec files to COPR
