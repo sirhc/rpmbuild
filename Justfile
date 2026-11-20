@@ -144,7 +144,7 @@ update spec version release='1':
     ' |
     sponge {{ spec }}
 
-  git diff {{ spec }}
+  git -c pager.diff='delta --paging=never' diff {{ spec }}
   if ! gum confirm 'Commit changes to {{ spec }} and publish?'; then
     git checkout {{ spec }}
     exit 0
