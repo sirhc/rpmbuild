@@ -78,10 +78,6 @@ The project uses `just` to handle common packaging tasks. Many commands will pro
   ```bash
   just upgrade
   ```
-- **Upgrade non-COPR managed packages (granted, miller, ticker):**
-  ```bash
-  just others
-  ```
 
 ## Development Conventions
 

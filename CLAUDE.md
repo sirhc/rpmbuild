@@ -59,9 +59,6 @@ just watch [build-id...]
 
 # Upgrade all COPR-managed packages via dnf
 just upgrade
-
-# Upgrade packages installed outside COPR (granted, miller, ticker) directly from GitHub releases
-just others
 ```
 
 ## Spec File Patterns

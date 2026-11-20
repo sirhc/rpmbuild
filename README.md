@@ -16,10 +16,3 @@ Publish a package to COPR.
 just publish <spec-file>
 ```
 
-## Install Other Packages
-
-These projects offer RPM packages that can be installed directly instead of bothering with COPR.
-
-```
-just others
-```
